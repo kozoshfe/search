@@ -1,0 +1,9 @@
+{
+  "name": "olx-position-checker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node olx-position-checker.js"
+  }
+}

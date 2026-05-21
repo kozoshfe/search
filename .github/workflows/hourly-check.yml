@@ -1,0 +1,42 @@
+name: OLX hourly check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/10 * * * *"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run OLX checker
+        run: |
+          python3 olx_position_checker.py | tee olx-output.txt
+
+      - name: Add report to job summary
+        if: always()
+        run: |
+          echo '```text' >> "$GITHUB_STEP_SUMMARY"
+          cat olx-output.txt >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: olx-report
+          path: |
+            olx-output.txt
+            olx-report.txt
+            my-ads-from-seller.txt
+          if-no-files-found: ignore

@@ -20,6 +20,9 @@ jobs:
           python-version: "3.11"
 
       - name: Run OLX checker
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           python3 olx_position_checker.py | tee olx-output.txt
 

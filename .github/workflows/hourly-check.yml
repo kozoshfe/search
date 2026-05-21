@@ -3,7 +3,7 @@ name: OLX hourly check
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/55 * * * *"
 
 jobs:
   check:

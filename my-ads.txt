@@ -1,7 +1,0 @@
-# Впиши нижче свої оголошення: по одному в рядок.
-# Можна вставляти повне посилання OLX, ID оголошення або точну/часткову назву.
-# Приклади:
-# https://www.olx.ua/d/uk/obyavlenie/noutbuk-hp-zbook-IDxxxxx.html
-# IDxxxxx
-# HP ZBook Firefly 15 G8
-

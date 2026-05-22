@@ -3,12 +3,17 @@ name: OLX hourly check
 on:
   workflow_dispatch:
   schedule:
-    - cron: "7 * * * *"
+    # GitHub Actions schedule is best-effort; an off-peak minute is usually less delayed than :00.
+    - cron: "17 * * * *"
+
+concurrency:
+  group: olx-hourly-check
+  cancel-in-progress: false
 
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
@@ -30,7 +35,11 @@ jobs:
         if: always()
         run: |
           echo '```text' >> "$GITHUB_STEP_SUMMARY"
-          cat olx-output.txt >> "$GITHUB_STEP_SUMMARY"
+          if [ -f olx-output.txt ]; then
+            cat olx-output.txt >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "olx-output.txt was not created." >> "$GITHUB_STEP_SUMMARY"
+          fi
           echo '```' >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload report

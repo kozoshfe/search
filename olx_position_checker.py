@@ -207,7 +207,15 @@ def parse_card(card_html, base_url):
         or ""
     )
 
-    return {"title": clean_text(title), "url": link, "id": extract_olx_id(link)}
+    price = extract_price(card_html)
+
+    return {
+        "title": clean_text(title),
+        "url": link,
+        "id": extract_olx_id(link),
+        "price": price,
+        "laptop_number": extract_laptop_number(price),
+    }
 
 
 def parse_links_fallback(page_html, base_url):
@@ -352,6 +360,12 @@ def build_telegram_message(listings, matches, markers):
         lines.append("")
         lines.append("На цій сторінці твої оголошення не знайдені.")
 
+    laptop_numbers = get_laptop_numbers(matches)
+    if laptop_numbers:
+        lines.append("")
+        lines.append("Номера знайдених ноутбуків : ")
+        lines.append(", ".join(laptop_numbers))
+
     return "\n".join(lines)
 
 
@@ -359,6 +373,20 @@ def clean_telegram_title(value):
     value = re.sub(r"\.css-[a-z0-9-]+\{[^}]*\}", " ", value or "", flags=re.I)
     value = re.sub(r"[-a-z]+:[^;\s]+;?", " ", value, flags=re.I)
     return re.sub(r"\s+", " ", value).strip()
+
+
+def get_laptop_numbers(matches):
+    numbers = []
+    seen = set()
+
+    for match in matches:
+        number = match.get("laptop_number") or extract_laptop_number(match.get("price", ""))
+        if not number or number in seen:
+            continue
+        seen.add(number)
+        numbers.append(number)
+
+    return numbers
 
 
 def send_telegram_if_configured(message):
@@ -467,6 +495,29 @@ def listing_to_marker(listing):
 def extract_by_regex(value, pattern):
     match = re.search(pattern, value, re.I)
     return match.group(1) if match else ""
+
+
+def extract_price(card_html):
+    patterns = [
+        r"data-testid=[\"']ad-price[\"'][^>]*>([\s\S]*?)</[^>]+>",
+        r"data-cy=[\"']ad-card-price[\"'][^>]*>([\s\S]*?)</[^>]+>",
+    ]
+
+    for pattern in patterns:
+        price = extract_by_regex(card_html, pattern)
+        if price:
+            return clean_text(price)
+
+    return ""
+
+
+def extract_laptop_number(price):
+    _, separator, after_separator = clean_text(price).partition("|")
+    if not separator:
+        return ""
+
+    match = re.search(r"\b\d{1,6}\b", after_separator)
+    return match.group(0) if match else ""
 
 
 def extract_attribute(value, name):

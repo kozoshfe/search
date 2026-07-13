@@ -369,11 +369,17 @@ def build_telegram_message(listings, matches, markers):
         lines.append("")
         lines.append("На цій сторінці твої оголошення не знайдені.")
 
-    laptop_numbers = get_laptop_numbers(matches)
+    laptop_numbers = get_laptop_numbers(markers)
     if laptop_numbers:
         lines.append("")
-        lines.append("Номера знайдених ноутбуків : ")
+        lines.append("Номера всіх ноутбуків : ")
         lines.append(", ".join(laptop_numbers))
+
+    promoted_laptop_numbers = get_laptop_numbers(matches)
+    if promoted_laptop_numbers:
+        lines.append("")
+        lines.append("Ноутбуки які рекламуються :")
+        lines.append(", ".join(promoted_laptop_numbers))
 
     return "\n".join(lines)
 
@@ -393,13 +399,14 @@ def get_laptop_numbers(matches):
             match.get("laptop_number")
             or extract_laptop_number(match.get("title", ""))
             or extract_laptop_number(match.get("price", ""))
+            or extract_laptop_number(match.get("raw", ""))
         )
         if not number or number in seen:
             continue
         seen.add(number)
         numbers.append(number)
 
-    return numbers
+    return sorted(numbers, key=int)
 
 
 def send_telegram_if_configured(message):
@@ -489,6 +496,7 @@ def to_marker(raw):
         "normalized_text": normalize_text(raw),
         "normalized_url": normalize_url(raw) if looks_like_url(raw) else "",
         "id": extract_olx_id(raw),
+        "laptop_number": extract_laptop_number(raw),
         "match_title": True,
     }
 
@@ -501,6 +509,7 @@ def listing_to_marker(listing):
         "normalized_text": normalize_text(listing.get("title", "")),
         "normalized_url": normalize_url(listing.get("url", "")),
         "id": listing.get("id", ""),
+        "laptop_number": listing.get("laptop_number") or extract_laptop_number(listing.get("title", "")),
         "match_title": False,
     }
 

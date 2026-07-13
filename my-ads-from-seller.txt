@@ -1,0 +1,13 @@
+# Автоматично зібрано зі сторінки продавця.
+# Джерело: https://noutok.olx.ua/uk/home/
+# Оновлено: 2026-07-13T12:52:07.577205+00:00
+# Формат: ID | Назва | URL
+
+ID10mWi1 | Потужний HP Zbook G5 | i7-8750H | 32 Гб DDR4 | 512 SSD | Ноутбук для монтажу | 215 | https://www.olx.ua/d/uk/obyavlenie/potuzhniy-hp-zbook-g5-i7-8750h-32-gb-ddr4-512-ssd-noutbuk-dlya-montazhu-215-ID10mWi1.html?reason=seller_listing%7Colx_shop_basic
+ID10v4ui | Ноутбук HP Zbook G5 | i7-8750H | 16 Гб DDR4 | 512 SSD | Ноутбук для монтажу | 213 | https://www.olx.ua/d/uk/obyavlenie/noutbuk-hp-zbook-g5-i7-8750h-16-gb-ddr4-512-ssd-noutbuk-dlya-montazhu-213-ID10v4ui.html?reason=seller_listing%7Colx_shop_basic
+ID10wGNq | Потужний HP Zbook G5 | i7-8750H | 16 Гб DDR4 | 512 SSD | Ноутбук для монтажу | 216 | https://www.olx.ua/d/uk/obyavlenie/potuzhniy-hp-zbook-g5-i7-8750h-16-gb-ddr4-512-ssd-noutbuk-dlya-montazhu-216-ID10wGNq.html?reason=seller_listing%7Colx_shop_basic
+ID10d3cc | Потужний HP Zbook G5 | i7-8750H | 16 Гб DDR4 | 512 SSD | Ноутбук для монтажу | 212 | https://www.olx.ua/d/uk/obyavlenie/potuzhniy-hp-zbook-g5-i7-8750h-16-gb-ddr4-512-ssd-noutbuk-dlya-montazhu-212-ID10d3cc.html?reason=seller_listing%7Colx_shop_basic
+ID10dunk | Потужний HP Zbook G5 | i7-8750H | 16 Гб DDR4 x 1024 SSD | Ноутбук для монтажу | 209 | https://www.olx.ua/d/uk/obyavlenie/potuzhniy-hp-zbook-g5-i7-8750h-16-gb-ddr4-x-1024-ssd-noutbuk-dlya-montazhu-209-ID10dunk.html?reason=seller_listing%7Colx_shop_basic
+ID10dwYw | Потужний HP Zbook G5 | i7-8750H | 32 Гб DDR4 x 512 SSD | Ноутбук для монтажу | 200 | https://www.olx.ua/d/uk/obyavlenie/potuzhniy-hp-zbook-g5-i7-8750h-32-gb-ddr4-x-512-ssd-noutbuk-dlya-montazhu-200-ID10dwYw.html?reason=seller_listing%7Colx_shop_basic
+ID10d3XO | Потужний HP Zbook G5 | i7-8750H | 32 Гб DDR4 x 512 SSD | Ноутбук для монтажу | 196 | https://www.olx.ua/d/uk/obyavlenie/potuzhniy-hp-zbook-g5-i7-8750h-32-gb-ddr4-x-512-ssd-noutbuk-dlya-montazhu-196-ID10d3XO.html?reason=seller_listing%7Colx_shop_basic
+ID10mW4r | Потужний HP Zbook G4 | i7-7700HQ | 8 Гб DDR4 | 256 SSD | Ноутбук для монтажу | 204 | https://www.olx.ua/d/uk/obyavlenie/potuzhniy-hp-zbook-g4-i7-7700hq-8-gb-ddr4-256-ssd-noutbuk-dlya-montazhu-204-ID10mW4r.html?reason=seller_listing%7Colx_shop_basic

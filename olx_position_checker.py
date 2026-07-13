@@ -207,14 +207,15 @@ def parse_card(card_html, base_url):
         or ""
     )
 
+    clean_title = clean_text(title)
     price = extract_price(card_html)
 
     return {
-        "title": clean_text(title),
+        "title": clean_title,
         "url": link,
         "id": extract_olx_id(link),
         "price": price,
-        "laptop_number": extract_laptop_number(price),
+        "laptop_number": extract_laptop_number(clean_title) or extract_laptop_number(price),
     }
 
 
@@ -225,7 +226,15 @@ def parse_links_fallback(page_html, base_url):
         url = urljoin(base_url, decode_html(match.group(2)))
         if not is_ad_url(url):
             continue
-        listings.append({"title": clean_text(match.group(3)), "url": url, "id": extract_olx_id(url)})
+        title = clean_text(match.group(3))
+        listings.append(
+            {
+                "title": title,
+                "url": url,
+                "id": extract_olx_id(url),
+                "laptop_number": extract_laptop_number(title),
+            }
+        )
     return listings
 
 
@@ -380,7 +389,11 @@ def get_laptop_numbers(matches):
     seen = set()
 
     for match in matches:
-        number = match.get("laptop_number") or extract_laptop_number(match.get("price", ""))
+        number = (
+            match.get("laptop_number")
+            or extract_laptop_number(match.get("title", ""))
+            or extract_laptop_number(match.get("price", ""))
+        )
         if not number or number in seen:
             continue
         seen.add(number)
@@ -511,12 +524,12 @@ def extract_price(card_html):
     return ""
 
 
-def extract_laptop_number(price):
-    _, separator, after_separator = clean_text(price).partition("|")
+def extract_laptop_number(value):
+    before_separator, separator, after_separator = clean_text(value).rpartition("|")
     if not separator:
         return ""
 
-    match = re.search(r"\b\d{1,6}\b", after_separator)
+    match = re.search(r"\b\d{1,6}\b", after_separator or before_separator)
     return match.group(0) if match else ""
 
 
